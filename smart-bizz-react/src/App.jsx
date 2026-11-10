@@ -127,7 +127,16 @@ export default function App() {
       <Route
         path="admin"
         element={
-          <Suspense fallback={null}>
+          <Suspense
+            fallback={
+              <div
+                role="status"
+                className="flex min-h-screen items-center justify-center bg-[linear-gradient(180deg,#F4FBFE_0%,#E3F4FB_40%,#D0EBF7_100%)] px-4 text-white/65"
+              >
+                Loading admin…
+              </div>
+            }
+          >
             <AdminApp />
           </Suspense>
         }

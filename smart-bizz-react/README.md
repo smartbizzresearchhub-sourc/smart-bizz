@@ -44,6 +44,16 @@ Firestore to view and manage contact enquiries.
 5. Add the website's production domain and any local development domain to
    **Authentication → Settings → Authorized domains**.
 
+### Deploying on Vercel
+
+Set the Vercel **Root Directory** to `smart-bizz-react`, with **Install Command**
+`npm install`, **Build Command** `npm run build`, and **Output Directory** `dist`.
+Add the six required `VITE_FIREBASE_*` values from the Firebase web app config
+to Vercel's Environment Variables for each environment you deploy (Production,
+Preview, and Development as applicable), then redeploy. Vite embeds these
+values during the build; the local `.env` file is not uploaded to Vercel.
+`VITE_FIREBASE_MEASUREMENT_ID` is optional.
+
 Visit `/admin` to sign in and manage enquiries. Public visitors can create
 validated enquiry records, but only the allowlisted admin can read, update their
 status, or delete them. The Firebase web config is not a replacement for the
