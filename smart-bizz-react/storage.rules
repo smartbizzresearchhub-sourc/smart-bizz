@@ -1,0 +1,35 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isAdmin(uid) {
+      return request.auth != null
+        && request.auth.uid == 'g3g2aoFniFW0vHYM6Qs7Kci6CJ32'
+        && request.auth.uid == uid;
+    }
+
+    function isAllowedUpload() {
+      return request.resource.size <= 10 * 1024 * 1024
+        && request.resource.contentType in [
+          'image/jpeg',
+          'image/png',
+          'image/webp',
+          'application/pdf',
+          'text/plain',
+          'text/csv',
+          'application/msword',
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+          'application/vnd.ms-excel',
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        ];
+    }
+
+    match /admin-uploads/{uid}/{fileName} {
+      allow read, delete: if isAdmin(uid);
+      allow create, update: if isAdmin(uid) && isAllowedUpload();
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

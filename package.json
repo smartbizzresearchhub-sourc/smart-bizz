@@ -1,0 +1,10 @@
+{
+  "name": "yogesh-web",
+  "private": true,
+  "scripts": {
+    "postinstall": "npm --prefix smart-bizz-react install",
+    "dev": "npm --prefix smart-bizz-react run dev",
+    "build": "npm --prefix smart-bizz-react run build",
+    "preview": "npm --prefix smart-bizz-react run preview"
+  }
+}
